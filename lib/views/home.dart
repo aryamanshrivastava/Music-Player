@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         iconTheme:
             IconThemeData(color: Theme.of(context).colorScheme.inversePrimary),
-        backgroundColor: Theme.of(context).colorScheme.p,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text('P L A Y L I S T',
             style: TextStyle(
                 color: Theme.of(context).colorScheme.inversePrimary,
