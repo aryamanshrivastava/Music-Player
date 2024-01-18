@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:music_player/components/my_drawer.dart';
+import 'package:music_player/model/playlist_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../model/song_model.dart';
+import 'song.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -11,22 +16,48 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late final dynamic playlistProvider;
+  @override
+  void initState() {
+    super.initState();
+    playlistProvider = Provider.of<PlaylistProvider>(context, listen: false);
+  }
+
+  void goToSong(int index) {
+    playlistProvider.setCurrentSongIndex = index;
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SongView()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      appBar: AppBar(
-        iconTheme:
-            IconThemeData(color: Theme.of(context).colorScheme.inversePrimary),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text('P L A Y L I S T',
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.inversePrimary,
-                fontSize: 20,
-                fontWeight: FontWeight.w500)),
-        centerTitle: true,
-      ),
-      drawer: MyDrawer(),
-    );
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Text('P L A Y L I S T',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500)),
+          centerTitle: true,
+        ),
+        drawer: MyDrawer(),
+        body: Consumer<PlaylistProvider>(builder: (context, value, child) {
+          final List<Song> playlist = value.getPlaylist;
+          return ListView.builder(
+            itemCount: playlist.length,
+            itemBuilder: (context, index) {
+              final Song song = playlist[index];
+              return ListTile(
+                title: Text(song.songName),
+                subtitle: Text(song.artistName),
+                leading: Image.asset(song.albumArtImagePath),
+                onTap: () => goToSong(index),
+              );
+            },
+          );
+        }));
   }
 }
