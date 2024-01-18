@@ -1,17 +1,134 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:music_player/components/neu_box.dart';
+import 'package:music_player/model/playlist_provider.dart';
+import 'package:provider/provider.dart';
 
-class SongView extends StatefulWidget {
+class SongView extends StatelessWidget {
   const SongView({super.key});
 
   @override
-  State<SongView> createState() => _SongViewState();
-}
-
-class _SongViewState extends State<SongView> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Consumer<PlaylistProvider>(builder: (context, value, child) {
+      final playlist = value.playlists;
+      final currentSong = playlist[value.currentSongIndex ?? 0];
+
+      return Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back)),
+                      Text(
+                        'P L A Y L I S T',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontSize: 20),
+                      ),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.menu))
+                    ],
+                  ),
+                  SizedBox(height: 25),
+                  NeuBox(
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(currentSong.albumArtImagePath)),
+                        Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(currentSong.songName,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20)),
+                                  Text(currentSong.artistName,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                          fontSize: 15))
+                                ],
+                              ),
+                              Icon(Icons.favorite, color: Colors.red)
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 25),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text("0:00"),
+                            Icon(Icons.shuffle),
+                            Icon(Icons.repeat),
+                            Text("0:00")
+                          ],
+                        ),
+                      ),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                            trackHeight: 5,
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 0)),
+                        child: Slider(
+                            value: 50,
+                            min: 0,
+                            max: 100,
+                            activeColor: Colors.green,
+                            onChanged: (value) {}),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {},
+                              child: NeuBox(child: Icon(Icons.skip_previous)))),
+                      SizedBox(width: 20),
+                      Expanded(
+                          flex: 2,
+                          child: GestureDetector(
+                              onTap: () {},
+                              child: NeuBox(child: Icon(Icons.play_arrow)))),
+                      SizedBox(width: 20),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {},
+                              child: NeuBox(child: Icon(Icons.skip_next)))),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ));
+    });
   }
 }
