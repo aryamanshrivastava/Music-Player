@@ -19,19 +19,19 @@ class _SettingsViewState extends State<SettingsView> {
         backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
             iconTheme:
-                IconThemeData(color: Theme.of(context).colorScheme.inversePrimary),
+                IconThemeData(color: Colors.white),
             backgroundColor: Theme.of(context).colorScheme.background,
             title: Text(
               'S E T T I N G S',
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
             centerTitle: true),
         body: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: EdgeInsets.all(16),
