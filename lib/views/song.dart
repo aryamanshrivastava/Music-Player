@@ -7,6 +7,13 @@ import 'package:provider/provider.dart';
 class SongView extends StatelessWidget {
   const SongView({super.key});
 
+  String formatTime(Duration duration) {
+    String twoDigitSeconds =
+        duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    String formattedTime = '${duration.inMinutes}:$twoDigitSeconds';
+    return formattedTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PlaylistProvider>(builder: (context, value, child) {
@@ -19,7 +26,6 @@ class SongView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 25, right: 25, bottom: 25),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +44,7 @@ class SongView extends StatelessWidget {
                       IconButton(onPressed: () {}, icon: Icon(Icons.menu))
                     ],
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 35),
                   NeuBox(
                     child: Column(
                       children: [
@@ -75,32 +81,38 @@ class SongView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 35),
                   Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text("0:00"),
+                          children: [
+                            Text(formatTime(value.currentDuration)),
                             Icon(Icons.shuffle),
                             Icon(Icons.repeat),
-                            Text("0:00")
+                            Text(formatTime(value.totalDuration)),
                           ],
                         ),
                       ),
+                      SizedBox(height: 10),
                       SliderTheme(
                         data: SliderTheme.of(context).copyWith(
                             trackHeight: 5,
                             thumbShape:
                                 RoundSliderThumbShape(enabledThumbRadius: 0)),
                         child: Slider(
-                            value: 50,
+                            value: value.currentDuration.inSeconds.toDouble(),
                             min: 0,
-                            max: 100,
+                            max: value.totalDuration.inSeconds.toDouble(),
                             activeColor: Colors.green,
-                            onChanged: (value) {}),
+                            onChanged: (double double) {
+                              value.seek(Duration(seconds: double.toInt()));
+                            },
+                            onChangeEnd: (double double) {
+                              value.seek(Duration(seconds: double.toInt()));
+                            }),
                       ),
                     ],
                   ),
@@ -110,18 +122,27 @@ class SongView extends StatelessWidget {
                     children: [
                       Expanded(
                           child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                value.playPreviousSong();
+                              },
                               child: NeuBox(child: Icon(Icons.skip_previous)))),
                       SizedBox(width: 20),
                       Expanded(
                           flex: 2,
                           child: GestureDetector(
-                              onTap: () {},
-                              child: NeuBox(child: Icon(Icons.play_arrow)))),
+                              onTap: () {
+                                value.pauseOrResume();
+                              },
+                              child: NeuBox(
+                                  child: Icon(value.isPlaying
+                                      ? Icons.pause
+                                      : Icons.play_arrow)))),
                       SizedBox(width: 20),
                       Expanded(
                           child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                value.playNextSong();
+                              },
                               child: NeuBox(child: Icon(Icons.skip_next)))),
                     ],
                   ),
