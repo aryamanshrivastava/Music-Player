@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Theme.of(context).colorScheme.background,
