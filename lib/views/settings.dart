@@ -18,13 +18,11 @@ class _SettingsViewState extends State<SettingsView> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
-            iconTheme:
-                IconThemeData(color: Colors.white),
-            backgroundColor: Theme.of(context).colorScheme.background,
+        
             title: Text(
               'S E T T I N G S',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),

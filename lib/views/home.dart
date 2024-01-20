@@ -34,11 +34,9 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Theme.of(context).colorScheme.background,
           title: Text('P L A Y L I S T',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: 20,
                   fontWeight: FontWeight.w500)),
           centerTitle: true,
