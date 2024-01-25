@@ -38,7 +38,6 @@ class SongView extends StatelessWidget {
                       Text(
                         'P L A Y L I S T',
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.onSecondary,
                             fontSize: 20),
                       ),
                       IconButton(onPressed: () {}, icon: Icon(Icons.menu))
