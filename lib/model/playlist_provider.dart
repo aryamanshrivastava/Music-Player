@@ -14,12 +14,12 @@ class PlaylistProvider extends ChangeNotifier {
         songName: "Acid Rap",
         artistName: "Chance The Rapper",
         albumArtImagePath: "assets/images/2.png",
-        audioPath: "audio/song.mp3"),
+        audioPath: "audio/song1.mp3"),
     Song(
         songName: "Pheonix",
         artistName: "ASAP Rocky",
         albumArtImagePath: "assets/images/3.png",
-        audioPath: "audio/song.mp3"),
+        audioPath: "audio/song2.mp3"),
   ];
 
   int? currentSongIndex;
