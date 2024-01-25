@@ -36,7 +36,6 @@ class _HomeViewState extends State<HomeView> {
         appBar: AppBar(
           title: Text('P L A Y L I S T',
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: 20,
                   fontWeight: FontWeight.w500)),
           centerTitle: true,

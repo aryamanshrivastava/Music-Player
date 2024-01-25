@@ -16,15 +16,11 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-        
             title: Text(
               'S E T T I N G S',
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             centerTitle: true),
         body: Container(
