@@ -8,7 +8,6 @@ A simple and sleek music player built using Flutter with all the basic features 
 - **⏭️ Next and Previous:** Navigate through your playlist effortlessly. Switch to the next track or go back to the previous one.
 - **🌓 Light and Dark Mode:**  Customize your music player experience with the choice of light or dark mode. Adjust the app's appearance to suit your mood and preferences.
 
-
 ## Getting Started 🛠️
 
 1. **Clone the Repository:**
@@ -37,4 +36,4 @@ A simple and sleek music player built using Flutter with all the basic features 
 Distributed under the MIT License. See [LICENSE](https://github.com/aryamanshrivastava/Music-Player/blob/main/LICENSE) for more information.
 
 ## Contact 📫
-Aryaman Shrivastava - shrivastavaaryaman0702@gmail.com
+🎉Aryaman Shrivastava - shrivastavaaryaman0702@gmail.com
